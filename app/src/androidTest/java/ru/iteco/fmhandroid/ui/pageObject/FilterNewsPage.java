@@ -37,11 +37,11 @@ public class FilterNewsPage {
         FilterNewsPage.CANCEL_BUTTON.check(matches(isDisplayed())).perform(click());
     }
 
-   public void categoryFilterNews(String category) {
-       Allure.step("Установка категории '" + category + "'");
-       CATEGORY_FILTER_NEWS.check(matches(isDisplayed())).perform(replaceText(category), closeSoftKeyboard());
-       onView(withText(category)).check(matches(isDisplayed()));
-   }
+    public void categoryFilterNews(String category) {
+        Allure.step("Установка категории '" + category + "'");
+        CATEGORY_FILTER_NEWS.check(matches(isDisplayed())).perform(replaceText(category), closeSoftKeyboard());
+        onView(withText(category)).check(matches(isDisplayed()));
+    }
 
     public void enterFromWhatDate(int days) {
         Allure.step("Ввести применить фильтр от '" + days + "' числа даты");
@@ -53,5 +53,4 @@ public class FilterNewsPage {
         UNTIL_WHAT_DATE.check(matches(isDisplayed())).perform(replaceText(Helper.getDate(days)), closeSoftKeyboard());
     }
 
-   }
-
+}

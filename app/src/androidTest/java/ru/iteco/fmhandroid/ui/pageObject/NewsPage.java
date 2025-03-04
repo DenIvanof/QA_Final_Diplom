@@ -7,16 +7,14 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.junit.Assert.assertTrue;
 
-import static ru.iteco.fmhandroid.ui.data.Helper.waitId;
-
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -31,7 +29,6 @@ public class NewsPage {
     public static ViewInteraction EDIT_NEWS_BUTTON = onView(allOf(withId(R.id.edit_news_material_button)));
     public static ViewInteraction HEADER_NEWS = onView(allOf(withText("News")));
     public static ViewInteraction NEWS_LIST = onView(withId(R.id.news_list_recycler_view));
-
     public static final int NEWS_LIST_RECYCLER_VIEW = R.id.news_list_recycler_view;
     public static final int NEWS_ITEM_PUBLICATION_DATE_VIEW = R.id.news_item_publication_date_text_view;
 
@@ -62,9 +59,36 @@ public class NewsPage {
                 .check(matches(isDisplayed()));
     }
 
+    private void scrollToItem(int position) {
+        Allure.step("Скролить список новостей до элемента на позиции " + position);
+        onView(withId(NEWS_LIST_RECYCLER_VIEW)).perform(RecyclerViewActions.scrollToPosition(position));
+    }
+
+    public String getDateAtPosition(int position) {
+        Allure.step("Получить дату новости по позиции " + position);
+        return Helper.getTextFromNews(NEWS_ITEM_PUBLICATION_DATE_VIEW, position);
+    }
+
+    public int getItemCount() {
+        Allure.step("Получить количество элементов в списке новостей");
+        return Helper.getRecyclerViewItemCount(NEWS_LIST_RECYCLER_VIEW);
+    }
+
     public int getNewsItemCount() {
         Allure.step("Получить количество элементов новостей");
         return Helper.getRecyclerViewItemCount(NEWS_LIST_RECYCLER_VIEW);
+    }
+
+    public String getFirstNewsDate() {
+        Allure.step("Получить дату первой новости");
+        scrollToItem(0);
+        return getDateAtPosition(0);
+    }
+
+    public String getLastNewsDate() {
+        Allure.step("Получить дату последней новости");
+        scrollToItem(getItemCount() - 1);
+        return getDateAtPosition(getItemCount() - 1);
     }
 
     public void checkAllNewsDateRange(int fromWhatDay, int untilWhatDay) {

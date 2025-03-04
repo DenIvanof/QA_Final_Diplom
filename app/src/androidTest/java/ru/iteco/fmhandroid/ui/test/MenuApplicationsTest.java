@@ -22,7 +22,7 @@ import ru.iteco.fmhandroid.ui.pageObject.MenuApplicationsPage;
 import ru.iteco.fmhandroid.ui.pageObject.NewsPage;
 
 @RunWith(AllureAndroidJUnit4.class)
-@Epic("Меню приложения")
+@Epic("3 Меню приложения")
 public class MenuApplicationsTest {
 
     @Rule

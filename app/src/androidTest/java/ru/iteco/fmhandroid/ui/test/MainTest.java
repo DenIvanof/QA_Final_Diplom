@@ -21,7 +21,7 @@ import ru.iteco.fmhandroid.ui.pageObject.MenuApplicationsPage;
 import ru.iteco.fmhandroid.ui.pageObject.NewsPage;
 
 @RunWith(AllureAndroidJUnit4.class)
-@Epic("Раздел Главная")
+@Epic("4 Раздел Главная")
 public class MainTest {
 
     @Rule
@@ -53,5 +53,12 @@ public class MainTest {
     public void goToNewsThroughAllNews() {
         mainPage.clickAllNews();
         newsPage.visibilityHeaderNews();
+    }
+
+    @Test
+    @DisplayName("4.2 Развернуть")
+    public void goToNews() {
+        mainPage.clickExpand();
+        mainPage.allNewsNotDisplayed();
     }
 }

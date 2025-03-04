@@ -23,9 +23,9 @@ import androidx.test.espresso.util.HumanReadables;
 import androidx.test.espresso.util.TreeIterables;
 import androidx.test.platform.app.InstrumentationRegistry;
 
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.junit.runner.Description;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -52,6 +52,24 @@ public class Helper {
     public static final String MASSAGE_CATEGORY = "Массаж";
     public static final String GRATITUDE_CATEGORY = "Благодарность";
     public static final String NEED_HELP_CATEGORY = "Нужна помощь";
+    public static final String QUOTE_DESCRIPTION_0 = "\"Ну, идеальное устройство мира в моих глазах. Где никто не оценивает, никто не осудит, где говоришь, и тебя слышат, где, если страшно, тебя обнимут и возьмут за руку, а если холодно тебя согреют.” Юля Капис, волонтер";
+    public static final String QUOTE_DESCRIPTION_1 = "Нет шаблона и стандарта, есть только дух, который живет в разных домах по-разному. Но всегда он добрый, любящий и помогающий.";
+    public static final String QUOTE_DESCRIPTION_2 = "Все сотрудники хосписа - это адвокаты пациента, его прав и потребностей. Поиск путей решения различных задач - это и есть хосписный индивидуальный подход к паллиативной помощи.";
+    public static final String QUOTE_DESCRIPTION_3 = "“Творчески и осознанно подойти к проектированию опыта умирания. Создать пространство физическое и психологическое, чтобы позволить жизни отыграть себя до конца. И тогда человек не просто уходит с дороги. Тогда старение и умирание могут стать процессом восхождения до самого конца” \n" + "Би Джей Миллер, врач, руководитель проекта \"Дзен-хоспис\"";
+    public static final String QUOTE_DESCRIPTION_4 = "\"Если пациента нельзя вылечить, это не значит, что для него ничего нельзя сделать. То, что кажется мелочью, пустяком в жизни здорового человека - для пациента имеет огромный смысл.\"";
+    public static final String QUOTE_DESCRIPTION_5 = "\" Хоспис - это мои новые друзья. Полная перезагрузка жизненных ценностей. В хосписе нет страха и одиночества.\"\nЕвгения Белоусова, дочь пациентки Ольги Васильевны";
+    public static final String QUOTE_DESCRIPTION_6 = "\"Делай добро... А добро заразительно. По-моему, все люди милосердны. Нужно просто говорить с ними об этом, суметь разбудить в них чувство сострадания, заложенное от рождения\" - В.В. Миллионщикова";
+    public static final String QUOTE_DESCRIPTION_7 = "\"Каждый, кто оказывается в стенах хосписа, имеет огромное значение в жизни хосписа и его подопечных\"";
+    public static final String QUOTE_TITLE_0 = "«Хоспис для меня - это то, каким должен быть мир.\"";
+    public static final String QUOTE_TITLE_1 = "Хоспис в своем истинном понимании - это творчество";
+    public static final String QUOTE_TITLE_2 = "“В хосписе не работают плохие люди” В.В. Миллионщикова\"";
+    public static final String QUOTE_TITLE_3 = "«Хоспис – это философия, из которой следует сложнейшая наука медицинской помощи умирающим и искусство ухода, в котором сочетается компетентность и любовь» С. Сандерс";
+    public static final String QUOTE_TITLE_4 = "Служение человеку с теплом, любовью и заботой";
+    public static final String QUOTE_TITLE_5 = "\"Хоспис продлевает жизнь, дает надежду, утешение и поддержку.\"";
+    public static final String QUOTE_TITLE_6 =
+            "\"Двигатель хосписа - милосердие плюс профессионализм\"\n" +
+            "А.В. Гнездилов, д.м.н., один из пионеров хосписного движения.";
+    public static final String QUOTE_TITLE_7 = "Важен каждый!";
 
 
     // Метод waitForView ожидает появления элемента на странице, чтобы убедиться, что он готов к взаимодействию.
@@ -235,4 +253,5 @@ public class Helper {
             }
         };
     }
+
 }

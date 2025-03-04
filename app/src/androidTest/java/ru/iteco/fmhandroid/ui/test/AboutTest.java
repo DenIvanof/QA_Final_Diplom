@@ -23,7 +23,7 @@ import ru.iteco.fmhandroid.ui.pageObject.MenuApplicationsPage;
 import ru.iteco.fmhandroid.ui.pageObject.NewsPage;
 
 @RunWith(AllureAndroidJUnit4.class)
-@Epic("Раздел О приложении")
+@Epic("8 Раздел О приложении")
 public class AboutTest {
 
     @Rule

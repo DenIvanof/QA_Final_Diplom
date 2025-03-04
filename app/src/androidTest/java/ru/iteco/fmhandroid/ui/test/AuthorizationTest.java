@@ -19,7 +19,7 @@ import ru.iteco.fmhandroid.ui.pageObject.MainPage;
 import ru.iteco.fmhandroid.ui.pageObject.MenuApplicationsPage;
 
 @RunWith(AllureAndroidJUnit4.class)
-@Epic("Страница авторизациии")
+@Epic("2 Страница авторизациии")
 public class AuthorizationTest {
 
     @Rule

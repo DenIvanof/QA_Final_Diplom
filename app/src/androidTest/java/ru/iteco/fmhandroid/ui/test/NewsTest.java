@@ -1,5 +1,7 @@
 package ru.iteco.fmhandroid.ui.test;
 
+import static org.junit.Assert.assertEquals;
+
 import android.view.View;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -23,7 +25,7 @@ import ru.iteco.fmhandroid.ui.pageObject.MenuApplicationsPage;
 import ru.iteco.fmhandroid.ui.pageObject.NewsPage;
 
 @RunWith(AllureAndroidJUnit4.class)
-@Epic("Раздел Новости")
+@Epic("5 Раздел Новости")
 public class NewsTest {
 
     @Rule
@@ -50,6 +52,23 @@ public class NewsTest {
         }
         authorizationTest.registeredUserAuthorization();
         mainPage.clickAllNews();
+        newsPage.visibilityHeaderNews();
+    }
+
+    @Test
+    @DisplayName("5.1 В разделе Новости включить сортировку новостей от более старой к более новой новости и от более новой к более старой новости")
+    public void verifyNewsDateSorting() {
+        newsPage.clickSortNews();
+        newsPage.clickSortNews();
+        newsPage.clickSortNews();
+        newsPage.clickSortNews();
+        String firstDateBeforeSorting = newsPage.getFirstNewsDate();
+        String lastDateBeforeSorting = newsPage.getLastNewsDate();
+        newsPage.clickSortNews();
+        String firstDateAfterSorting = newsPage.getFirstNewsDate();
+        String lastDateAfterSorting = newsPage.getLastNewsDate();
+        assertEquals(lastDateBeforeSorting, firstDateAfterSorting);
+        assertEquals(firstDateBeforeSorting, lastDateAfterSorting);
     }
 
     @Test
@@ -125,9 +144,106 @@ public class NewsTest {
     }
 
     @Test
-    @DisplayName("Фильтрация новостей по диапазону дат")
-    public void shouldFilterNewsWithinDateRange() {
+    @DisplayName("5.10 Применение фильтра списка новостей в разделе Новости по дате ")
+    public void filterNewsWithinDateRange() {
+        newsPage.visibilityHeaderNews();
         newsPage.clickFilterNews();
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.11 Применение фильтра списка новостей в разделе Новости по категории Объявление и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryAnnouncement() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.ANNOUNCEMENT_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.12 Применение фильтра списка новостей в разделе Новости по категории День рождения и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryBirthday() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.BIRTHDAY_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.13 Применение фильтра списка новостей в разделе Новости по категории Зарплата и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategorySalary() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.SALARY_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.14 Применение фильтра списка новостей в разделе Новости по категории Профсоюз и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryTradeUnion() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.TRADE_UNION_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.15 Применение фильтра списка новостей в разделе Новости по категории Праздник и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryHoliday() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.HOLIDAY_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.16 Применение фильтра списка новостей в разделе Новости по категории Массаж и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryMassage() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.MASSAGE_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.17 Применение фильтра списка новостей в разделе Новости по категории Благодарность и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryGratitude() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.GRATITUDE_CATEGORY);
+        filterNewsPage.enterFromWhatDate(-7);
+        filterNewsPage.enterUntilWhatDate(7);
+        filterNewsPage.clickFilter();
+        newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.18 Применение фильтра списка новостей в разделе Новости по категории Нужна помощь и в определенном диапазоне дат")
+    public void filterNewsWithinDateRangeAndCategoryNeedHelp() {
+        newsPage.visibilityHeaderNews();
+        newsPage.clickFilterNews();
+        filterNewsPage.categoryFilterNews(Helper.NEED_HELP_CATEGORY);
         filterNewsPage.enterFromWhatDate(-7);
         filterNewsPage.enterUntilWhatDate(7);
         filterNewsPage.clickFilter();
