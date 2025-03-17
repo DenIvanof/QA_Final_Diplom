@@ -19,6 +19,7 @@ import ru.iteco.fmhandroid.ui.data.Helper;
 import ru.iteco.fmhandroid.ui.pageObject.AboutPage;
 import ru.iteco.fmhandroid.ui.pageObject.AuthorizationPage;
 import ru.iteco.fmhandroid.ui.pageObject.ButterflyPage;
+import ru.iteco.fmhandroid.ui.pageObject.ControlPanelPage;
 import ru.iteco.fmhandroid.ui.pageObject.FilterNewsPage;
 import ru.iteco.fmhandroid.ui.pageObject.MainPage;
 import ru.iteco.fmhandroid.ui.pageObject.MenuApplicationsPage;
@@ -33,6 +34,7 @@ public class NewsTest {
             new ActivityScenarioRule<>(AppActivity.class);
     MenuApplicationsPage menuApplicationsPage = new MenuApplicationsPage();
     MainPage mainPage = new MainPage();
+    ControlPanelPage controlPanelPage = new ControlPanelPage();
     NewsPage newsPage = new NewsPage();
     AboutPage aboutPage = new AboutPage();
     ButterflyPage butterflyPage = new ButterflyPage();
@@ -45,12 +47,13 @@ public class NewsTest {
     public void setUp() {
         mActivityScenarioRule.getScenario().onActivity(activity -> decorView = activity.getWindow().getDecorView());
         try {
-            authorizationPage.verifySignInButtonVisible();
+            mainPage.verifyAllNewsButtonVisible();
         } catch (Exception e) {
-            menuApplicationsPage.clickProfile();
-            menuApplicationsPage.clickLogOut();
+            authorizationPage.verifySignInButtonVisible();
+            authorizationPage.fillAuthorizationFields(Helper.VALID_LOGIN, Helper.VALID_PASSWORD);
+            authorizationPage.clickSignIn();
+            mainPage.verifyAllNewsButtonVisible();
         }
-        authorizationTest.registeredUserAuthorization();
         mainPage.clickAllNews();
         newsPage.visibilityHeaderNews();
     }
@@ -58,10 +61,6 @@ public class NewsTest {
     @Test
     @DisplayName("5.1 В разделе Новости включить сортировку новостей от более старой к более новой новости и от более новой к более старой новости")
     public void verifyNewsDateSorting() {
-        newsPage.clickSortNews();
-        newsPage.clickSortNews();
-        newsPage.clickSortNews();
-        newsPage.clickSortNews();
         String firstDateBeforeSorting = newsPage.getFirstNewsDate();
         String lastDateBeforeSorting = newsPage.getLastNewsDate();
         newsPage.clickSortNews();
@@ -248,5 +247,12 @@ public class NewsTest {
         filterNewsPage.enterUntilWhatDate(7);
         filterNewsPage.clickFilter();
         newsPage.checkAllNewsDateRange(-7, 7);
+    }
+
+    @Test
+    @DisplayName("5.19 Переход на страницу редактирования новестей Панель управления в разделе Новости")
+    public void openControlPanel() {
+        newsPage.clickEditNews();
+        controlPanelPage.visibilityHeaderControlPanel();
     }
 }

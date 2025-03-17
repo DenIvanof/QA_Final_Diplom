@@ -26,6 +26,9 @@ public class FilterNewsPage {
     public static ViewInteraction CATEGORY_FILTER_NEWS = onView(withId(R.id.news_item_category_text_auto_complete_text_view));
     public static ViewInteraction FROM_WHAT_DATE = onView(withId(R.id.news_item_publish_date_start_text_input_edit_text));
     public static ViewInteraction UNTIL_WHAT_DATE = onView(withId(R.id.news_item_publish_date_end_text_input_edit_text));
+    public static ViewInteraction ACTIVE_CHECK_BOX = onView(withId(R.id.filter_news_active_material_check_box));
+    public static ViewInteraction NOT_ACTIVE_CHECK_BOX = onView(withId(R.id.filter_news_inactive_material_check_box));
+    public static ViewInteraction STATUS_BUTTON = onView(allOf(withId(R.id.switcher)));
 
     public void clickFilter() {
         Allure.step("Нажать на кнопку Фильтр");
@@ -53,4 +56,18 @@ public class FilterNewsPage {
         UNTIL_WHAT_DATE.check(matches(isDisplayed())).perform(replaceText(Helper.getDate(days)), closeSoftKeyboard());
     }
 
+    public void clickActive() {
+        Allure.step("Нажать на чекбокс Активна");
+        FilterNewsPage.ACTIVE_CHECK_BOX.check(matches(isDisplayed())).perform(click());
+    }
+
+    public void clickNotActive() {
+        Allure.step("Нажать на чекбокс Не активна");
+        FilterNewsPage.NOT_ACTIVE_CHECK_BOX.check(matches(isDisplayed())).perform(click());
+    }
+
+    public void clickStatusButton() {
+        Allure.step("Нажать на переключатель статуса");
+        FilterNewsPage.STATUS_BUTTON.check(matches(isDisplayed())).perform(click());
+    }
 }

@@ -27,8 +27,12 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeoutException;
 
 import ru.iteco.fmhandroid.R;
@@ -42,6 +46,7 @@ public class Helper {
     public static final String AUTHENTICATION_ERROR_MESSAGE = "Something went wrong. Try again later.";
     public static final String EMPTY_FIELD = "";
     public static final String EMPTY_FIELDS_ERROR_MESSAGE = "Login and password cannot be empty";
+    public static final String ERROR_MESSAGE = "Fill empty fields";
     public static final String PRIVACY_POLICY_URL = "https://vhospice.org/#/privacy-policy/";
     public static final String TERMS_OF_USE_URL = "https://vhospice.org/#/terms-of-use";
     public static final String ANNOUNCEMENT_CATEGORY = "Объявление";
@@ -52,6 +57,10 @@ public class Helper {
     public static final String MASSAGE_CATEGORY = "Массаж";
     public static final String GRATITUDE_CATEGORY = "Благодарность";
     public static final String NEED_HELP_CATEGORY = "Нужна помощь";
+    public static final String TITLE_NEWS_TEXT = "Тестовая новость без полезной информации";
+    public static final String CHANGE_TITLE_NEWS_TEXT = "Измененая тестовая новость без полезной информации";
+    public static final String DESCRIPTION_NEWS_TEXT = "Напиши хороший код, и ты будешь нужен фирме пару дней. Напиши плохой код, и ты будешь нужен фирме всю жизнь.";
+    public static final String NEW_DESCRIPTION_NEWS_TEXT = "На этом описании кончилась фантазия";
     public static final String QUOTE_DESCRIPTION_0 = "\"Ну, идеальное устройство мира в моих глазах. Где никто не оценивает, никто не осудит, где говоришь, и тебя слышат, где, если страшно, тебя обнимут и возьмут за руку, а если холодно тебя согреют.” Юля Капис, волонтер";
     public static final String QUOTE_DESCRIPTION_1 = "Нет шаблона и стандарта, есть только дух, который живет в разных домах по-разному. Но всегда он добрый, любящий и помогающий.";
     public static final String QUOTE_DESCRIPTION_2 = "Все сотрудники хосписа - это адвокаты пациента, его прав и потребностей. Поиск путей решения различных задач - это и есть хосписный индивидуальный подход к паллиативной помощи.";
@@ -66,9 +75,7 @@ public class Helper {
     public static final String QUOTE_TITLE_3 = "«Хоспис – это философия, из которой следует сложнейшая наука медицинской помощи умирающим и искусство ухода, в котором сочетается компетентность и любовь» С. Сандерс";
     public static final String QUOTE_TITLE_4 = "Служение человеку с теплом, любовью и заботой";
     public static final String QUOTE_TITLE_5 = "\"Хоспис продлевает жизнь, дает надежду, утешение и поддержку.\"";
-    public static final String QUOTE_TITLE_6 =
-            "\"Двигатель хосписа - милосердие плюс профессионализм\"\n" +
-            "А.В. Гнездилов, д.м.н., один из пионеров хосписного движения.";
+    public static final String QUOTE_TITLE_6 = "\"Двигатель хосписа - милосердие плюс профессионализм\"\n" + "А.В. Гнездилов, д.м.н., один из пионеров хосписного движения.";
     public static final String QUOTE_TITLE_7 = "Важен каждый!";
 
 
@@ -110,11 +117,7 @@ public class Helper {
             }
 
             private PerformException createTimeoutException(View view) {
-                return new PerformException.Builder()
-                        .withActionDescription(this.getDescription())
-                        .withViewDescription(HumanReadables.describe(view))
-                        .withCause(new TimeoutException())
-                        .build();
+                return new PerformException.Builder().withActionDescription(this.getDescription()).withViewDescription(HumanReadables.describe(view)).withCause(new TimeoutException()).build();
             }
         };
     }
@@ -147,31 +150,53 @@ public class Helper {
     // Метод возвращает количество элементов в указанном RecyclerView.
     public static int getRecyclerViewItemCount(@IdRes int recyclerViewId) {
         final int[] count = new int[1];
-        onView(allOf(withId(recyclerViewId), isDisplayed()))
-                .check((view, noViewFoundException) -> {
-                    if (view instanceof RecyclerView) {
-                        RecyclerView recyclerView = (RecyclerView) view;
-                        RecyclerView.Adapter adapter = recyclerView.getAdapter();
-                        if (adapter != null) {
-                            count[0] = adapter.getItemCount();
-                        }
-                    }
-                });
+        onView(allOf(withId(recyclerViewId), isDisplayed())).check((view, noViewFoundException) -> {
+            if (view instanceof RecyclerView) {
+                RecyclerView recyclerView = (RecyclerView) view;
+                RecyclerView.Adapter adapter = recyclerView.getAdapter();
+                if (adapter != null) {
+                    count[0] = adapter.getItemCount();
+                }
+            }
+        });
         return count[0];
     }
 
     // Метод получает текст из элемента новостей по заданной позиции.
     public static String getTextFromNews(int fieldId, int position) {
         final String[] itemText = new String[1];
-        onView(withRecyclerView(R.id.news_list_recycler_view).atPosition(position))
-                .check((view, noViewFoundException) -> {
-                    if (noViewFoundException != null) {
-                        throw noViewFoundException;
-                    }
-                    TextView textView = view.findViewById(fieldId);
-                    itemText[0] = textView.getText().toString();
-                });
+        onView(withRecyclerView(R.id.news_list_recycler_view).atPosition(position)).check((view, noViewFoundException) -> {
+            if (noViewFoundException != null) {
+                throw noViewFoundException;
+            }
+            TextView textView = view.findViewById(fieldId);
+            itemText[0] = textView.getText().toString();
+        });
         return itemText[0];
+    }
+
+    public static Matcher<View> childAtPosition(final Matcher<View> parentMatcher, final int position) {
+
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup && parentMatcher.matches(parent) && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+
+    // Метод получает текущее время
+    public static String getCurrentTime() {
+        Date currentDate = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        return dateFormat.format(currentDate);
     }
 
     // Класс для поиска элементов в RecyclerView по позициям и идентификаторам.
@@ -232,26 +257,6 @@ public class Helper {
                 }
             };
         }
-    }
-
-
-    public static Matcher<View> childAtPosition(
-            final Matcher<View> parentMatcher, final int position) {
-
-        return new TypeSafeMatcher<View>() {
-            @Override
-            public void describeTo(Description description) {
-                description.appendText("Child at position " + position + " in parent ");
-                parentMatcher.describeTo(description);
-            }
-
-            @Override
-            public boolean matchesSafely(View view) {
-                ViewParent parent = view.getParent();
-                return parent instanceof ViewGroup && parentMatcher.matches(parent)
-                        && view.equals(((ViewGroup) parent).getChildAt(position));
-            }
-        };
     }
 
 }

@@ -30,7 +30,7 @@ public class NewsPage {
     public static ViewInteraction HEADER_NEWS = onView(allOf(withText("News")));
     public static ViewInteraction NEWS_LIST = onView(withId(R.id.news_list_recycler_view));
     public static final int NEWS_LIST_RECYCLER_VIEW = R.id.news_list_recycler_view;
-    public static final int NEWS_ITEM_PUBLICATION_DATE_VIEW = R.id.news_item_publication_date_text_view;
+    public static final int NEWS_ITEM_PUBLICATION_DATE_VIEW = R.id.news_item_date_text_view;
 
     public void visibilityHeaderNews() {
         Allure.step("Проверка на отображение заголовка Новости на новостной странице");

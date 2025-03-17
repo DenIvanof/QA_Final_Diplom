@@ -13,6 +13,7 @@ import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Epic;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.ui.data.Helper;
 import ru.iteco.fmhandroid.ui.pageObject.AboutPage;
 import ru.iteco.fmhandroid.ui.pageObject.AuthorizationPage;
 import ru.iteco.fmhandroid.ui.pageObject.ButterflyPage;
@@ -40,12 +41,13 @@ public class MainTest {
     public void setUp() {
         mActivityScenarioRule.getScenario().onActivity(activity -> decorView = activity.getWindow().getDecorView());
         try {
-            authorizationPage.verifySignInButtonVisible();
+            mainPage.verifyAllNewsButtonVisible();
         } catch (Exception e) {
-            menuApplicationsPage.clickProfile();
-            menuApplicationsPage.clickLogOut();
+            authorizationPage.verifySignInButtonVisible();
+            authorizationPage.fillAuthorizationFields(Helper.VALID_LOGIN, Helper.VALID_PASSWORD);
+            authorizationPage.clickSignIn();
+            mainPage.verifyAllNewsButtonVisible();
         }
-        authorizationTest.registeredUserAuthorization();
     }
 
     @Test

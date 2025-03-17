@@ -45,12 +45,13 @@ public class ButterflyTest {
     public void setUp() {
         mActivityScenarioRule.getScenario().onActivity(activity -> decorView = activity.getWindow().getDecorView());
         try {
-            authorizationPage.verifySignInButtonVisible();
+            mainPage.verifyAllNewsButtonVisible();
         } catch (Exception e) {
-            menuApplicationsPage.clickProfile();
-            menuApplicationsPage.clickLogOut();
+            authorizationPage.verifySignInButtonVisible();
+            authorizationPage.fillAuthorizationFields(Helper.VALID_LOGIN, Helper.VALID_PASSWORD);
+            authorizationPage.clickSignIn();
+            mainPage.verifyAllNewsButtonVisible();
         }
-        authorizationTest.registeredUserAuthorization();
         menuApplicationsPage.clickButterfly();
         butterflyPage.visibilityHeaderLoveIsAll();
     }
