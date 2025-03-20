@@ -59,13 +59,13 @@
 <br>
 
 ## 4. Тестовая документация на проекте
-- [План](Plan.md#план-тестирования-приложения-мобильный-хоспис) по проверке и автоматизации приложения (`Plan.md`)
+- [План](https://github.com/DenIvanof/QA_Final_Diplom/blob/main/Dokuments/Plan.md) по проверке и автоматизации приложения (`Plan.md`)
 
 - [Чек-лист](https://docs.google.com/spreadsheets/d/11A69oGJS54eLRgzj9U9-s91qjpw6ZCxj/edit?usp=sharing&ouid=100012981727855823437&rtpof=true&sd=true) c отметками о пройденных и не пройденных тестах (`Check.xlsx`)
 
 - [Тест-кейсы](https://docs.google.com/spreadsheets/d/1GehWE-hJ9bIBPfzg4VCuqocCDwiwQIeS/edit?usp=sharing&ouid=100012981727855823437&rtpof=true&sd=true) для проверки приложения (`Cases.xlsx`)
 
-- [Баг-репорты](Ссылка) оформленные как (`Issues`)
+- [Баг-репорты](https://github.com/DenIvanof/QA_Final_Diplom/issues) оформленные как (`Issues`)
 
 - [allure-отчет](Ссылка) с результатами прогона авто тестов запакованный в zip-архив (`allure-results.zip`)
 
