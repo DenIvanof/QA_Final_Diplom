@@ -1,0 +1,137 @@
+{
+    "name": "8.2 Гипер ссылка Пользовательское соглашение в разделе О приложении переводит на страницу с информацие Пользовательское соглашение",
+    "start": 1742576975138,
+    "stop": 1742577036093,
+    "stage": "finished",
+    "description": null,
+    "descriptionHtml": null,
+    "status": "passed",
+    "statusDetails": null,
+    "steps": [
+        {
+            "name": "Проверка на отображение кнопки Все новости на главной странице",
+            "start": 1742576977501,
+            "stop": 1742576977502,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на Трехстрочное меню",
+            "start": 1742576986942,
+            "stop": 1742576986943,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать кнопку О риложении в трехстрочном меню",
+            "start": 1742576989511,
+            "stop": 1742576989511,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Нажать на ссылку Условия эксплуатации",
+            "start": 1742576989966,
+            "stop": 1742576989967,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        },
+        {
+            "name": "Проверка, что инициирован Intent с действием VIEW и правильным URL",
+            "start": 1742576990455,
+            "stop": 1742576990455,
+            "stage": "finished",
+            "description": null,
+            "descriptionHtml": null,
+            "status": "passed",
+            "statusDetails": null,
+            "steps": [
+            ],
+            "attachments": [
+            ],
+            "parameters": [
+            ]
+        }
+    ],
+    "attachments": [
+    ],
+    "parameters": [
+    ],
+    "uuid": "f4838e4f-4ffc-4948-92a6-653fdad135da",
+    "historyId": "38c7e4ac8d3ef3e909d6c76b16662dcd",
+    "fullName": "ru.iteco.fmhandroid.ui.test.AboutTest.thereMustBeCorrectTermsOfUseUrl",
+    "labels": [
+        {
+            "name": "package",
+            "value": "ru.iteco.fmhandroid.ui.test"
+        },
+        {
+            "name": "testClass",
+            "value": "ru.iteco.fmhandroid.ui.test.AboutTest"
+        },
+        {
+            "name": "testMethod",
+            "value": "thereMustBeCorrectTermsOfUseUrl"
+        },
+        {
+            "name": "suite",
+            "value": "ru.iteco.fmhandroid.ui.test.AboutTest"
+        },
+        {
+            "name": "host",
+            "value": "localhost"
+        },
+        {
+            "name": "thread",
+            "value": "Instr: io.qameta.allure.android.runners.AllureAndroidJUnitRunner(865)"
+        },
+        {
+            "name": "framework",
+            "value": "junit4"
+        },
+        {
+            "name": "language",
+            "value": "kotlin"
+        },
+        {
+            "name": "epic",
+            "value": "8 Раздел О приложении"
+        }
+    ]
+}

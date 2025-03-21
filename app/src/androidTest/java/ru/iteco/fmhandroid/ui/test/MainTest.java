@@ -58,8 +58,8 @@ public class MainTest {
     }
 
     @Test
-    @DisplayName("4.2 Развернуть")
-    public void goToNews() {
+    @DisplayName("4.2 Свернуть список последних новостей")
+    public void expandToNews() {
         mainPage.clickExpand();
         mainPage.allNewsNotDisplayed();
     }
